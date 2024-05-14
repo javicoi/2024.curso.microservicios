@@ -1,0 +1,35 @@
+version: "3"
+
+#networks:
+#  gitea:
+#    external: false
+## ===============================
+volumes:
+  vol_gitea:
+    external: true
+## ===============================    
+    
+## ===============================
+networks:
+  net-micro:
+    external: true
+## ===============================
+
+services:
+  gitea:
+    image: gitea/gitea:1.21.11
+    container_name: gitea
+    hostname: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    networks:
+      - net-micro
+    volumes:
+      - vol_gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+    #  - "222:22"

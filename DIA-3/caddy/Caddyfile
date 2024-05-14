@@ -1,0 +1,23 @@
+dns.curso.micro:443 {
+	tls /certs/_wildcard.curso.micro.pem /certs/_wildcard.curso.micro-key.pem
+	reverse_proxy http://dns:5380
+	encode gzip
+}
+
+tools.curso.micro:443 {
+	tls /certs/_wildcard.curso.micro.pem /certs/_wildcard.curso.micro-key.pem
+	reverse_proxy http://it-tools:80
+	encode gzip
+}
+
+pdf.curso.micro:443 {
+	tls /certs/_wildcard.curso.micro.pem /certs/_wildcard.curso.micro-key.pem
+	reverse_proxy http://stirling-pdf:8080
+	encode gzip
+}
+
+gitea.curso.micro:443 {
+	tls /certs/_wildcard.curso.micro.pem /certs/_wildcard.curso.micro-key.pem
+	reverse_proxy http://gitea:3000
+	encode gzip
+}

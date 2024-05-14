@@ -1,0 +1,21 @@
+version: "3"
+
+tasks:
+  up:
+    silent: true
+    cmds:
+      - echo ">> CADDY - levantamos servicios..."
+      - cmd: docker compose --file ./compose.yml up -d
+        ignore_error: true
+      - echo ">> CADDY - esperamos 10 segundos para que se levanten los servicios..."
+      - sleep 5
+
+  down:
+    silent: true
+    cmds:
+      - echo ">> CADDY - paramos servicios..."
+      - cmd: docker compose  --file ./compose.yml down
+        ignore_error: true
+      - echo ">> CADDY - esperamos 10 segundos para que se paren los servicios..."
+      - sleep 5
+

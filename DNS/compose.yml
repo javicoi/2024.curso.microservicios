@@ -1,0 +1,31 @@
+version: "3.7"
+
+## ===============================
+networks:
+  net-micro:
+    external: true
+## ===============================
+## ===============================
+volumes:
+  vol_dns:
+    external: true
+## ===============================
+
+# ocker run -d --mount 'src=vol_dns,dst=/etc/dns' -p 5380:5380 -p 53:53/tcp -p 53:53/udp --name dns technitium/dns-server:latest
+
+services:
+  dns:
+    image: technitium/dns-server:12.1
+    restart: always
+    container_name: dns-server
+    hostname: dns-server
+    volumes:
+      - vol_dns:/etc/dns
+
+    ports:
+      - 53:53/udp
+      - 53:53/tcp
+      - 5380:5380
+
+    networks:
+      - net-micro

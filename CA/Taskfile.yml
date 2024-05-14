@@ -1,0 +1,19 @@
+version: "3"
+
+tasks:
+  certs.copy:
+    cmds:
+      - cmd: docker volume create vol_certs
+        ignore_error: true
+
+      # sleep 10 es para mantener vivo el contenedor mientras copiamos.
+      - cmd: docker run --rm -d --name alpine --mount 'type=volume,src=vol_certs,dst=/certs' alpine sleep 10
+        ignore_error: true
+      
+      - cmd: docker cp _wildcard.curso.micro.pem alpine:/certs
+        ignore_error: true
+
+      - cmd: docker cp _wildcard.curso.micro-key.pem alpine:/certs
+        ignore_error: true
+      
+      - cmd: docker exec alpine ls /certs

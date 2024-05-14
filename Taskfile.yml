@@ -1,0 +1,6 @@
+version: "3"
+
+includes:
+  dns:
+    dir: ./DNS
+    taskfile: ./DNS/Taskfile.yml

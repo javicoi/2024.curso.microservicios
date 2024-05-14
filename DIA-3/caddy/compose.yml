@@ -1,0 +1,29 @@
+version: "3.7"
+
+## ===============================
+networks:
+  net-micro:
+    external: true
+## ===============================
+## ===============================
+volumes:
+  vol_certs:
+    external: true
+## ===============================
+
+
+services:
+  caddy:
+    image: caddy:latest
+    restart: always
+    container_name: caddy-server
+    hostname: caddy-server
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - vol_certs:/certs:ro
+    ports:
+      - 80:80
+      - 443:443
+
+    networks:
+      - net-micro
