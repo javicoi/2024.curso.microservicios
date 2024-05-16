@@ -21,3 +21,9 @@ gitea.curso.micro:443 {
 	reverse_proxy http://gitea:3000
 	encode gzip
 }
+
+mail.curso.micro:443 {
+	tls /certs/_wildcard.curso.micro.pem /certs/_wildcard.curso.micro-key.pem
+	reverse_proxy http://mail:9000
+	encode gzip	
+}

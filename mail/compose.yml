@@ -1,0 +1,21 @@
+version: "3"
+
+   
+## ===============================
+networks:
+  net-micro:
+    external: true
+## ===============================
+
+services:
+  mail:
+    image: inbucket/inbucket
+    container_name: mail
+    hostname: mail
+    restart: always
+    networks:
+      - net-micro
+    ports:
+      - "9000:9000"
+      - "2500:2500"
+      - "1100:1100"

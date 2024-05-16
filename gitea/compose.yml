@@ -23,6 +23,39 @@ services:
     environment:
       - USER_UID=1000
       - USER_GID=1000
+      #====== DATABASE =======#
+      #- GITEA__database__DB_TYPE=postgres
+      #- GITEA__database__HOST=db:5432
+      #- GITEA__database__NAME=gitea
+      #- GITEA__database__USER=gitea
+      #- GITEA__database__PASSWD=gitea   
+      #====== SERVER =======#
+      - GITEA__server__DOMAIN=gitea.curso.micro
+      - GITEA__server__ROOT_URL=https://gitea.curso.micro
+      #====== SERVER =======#
+      #- GITEA__actions__ENABLED=false
+      - GITEA__actions__ENABLED=true
+
+      #====== MAILER =======#
+      # [mailer]
+      # ENABLED        = true
+      # FROM           = gitea@mydomain.com
+      # PROTOCOL       = smtps
+      # SMTP_ADDR      = mail.mydomain.com
+      # SMTP_PORT      = 587
+      # USER           = gitea@mydomain.com
+      # PASSWD         = `password`
+      - GITEA__mailer__ENABLED=true
+      - GITEA__mailer__FROM=gitea@curso.micro
+      - GITEA__mailer__PROTOCOL=smtp
+      - GITEA__mailer__SMTP_ADDR=mail # Nombre del servicio que despliega el contenedor inbucket
+      - GITEA__mailer__SMTP_PORT=2500 # Puerto, como es directo entre gitea -> inbucket, no es necesario hacer nada en traefik.
+
+      - GITEA__mailer__USER=gitea
+      #====== SECURITY =======#
+      # Lo ponemos para que al crear la contraseña "curso" se permita.
+      - GITEA__security__MIN_PASSWORD_LENGTH=4      
+   
     restart: always
     networks:
       - net-micro

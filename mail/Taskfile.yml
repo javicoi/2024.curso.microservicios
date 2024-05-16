@@ -1,0 +1,26 @@
+version: "3"
+
+tasks:
+  up:
+    silent: true
+    cmds:
+      - echo ">> DNS - levantamos servicios..."
+      - cmd: docker compose --file ./compose.yml up -d
+        ignore_error: true
+      - echo ">> DNS - esperamos 10 segundos para que se levanten los servicios..."
+      - sleep 5
+
+  down:
+    silent: true
+    cmds:
+      - echo ">> DNS - paramos servicios..."
+      - cmd: docker compose --file ./compose.yml down
+        ignore_error: true
+      - echo ">> DNS - esperamos 10 segundos para que se paren los servicios..."
+      - sleep 5
+
+  restart:
+    silent: true
+    cmds:
+      - task: down
+      - task: up
